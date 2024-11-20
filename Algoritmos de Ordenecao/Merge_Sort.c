@@ -3,7 +3,7 @@
 // esq seria o primeiro elemento e dir o ultimo passados como parametros
 // Função para realizar o merge (mesclagem) entre dois sub-arrays ordenados
 void mergeSort(int array[], int esq, int dir){ // Ordem crescente
-    // COndição de parada: quando o intervalo for válido (esq < dir)
+    // Condição de parada: quando o intervalo for válido (esq < dir)
     if(esq < dir){
         // Encontrar o ponto médio
         int medio = (esq + dir) / 2;
@@ -61,7 +61,7 @@ void mergeSort(int array[], int esq, int dir){ // Ordem crescente
 
 /*
 Análise da complexidade:
-- 
-- 
-- O(nlog⁡n)
+- Ω(nlogn)
+- Θ(nlogn)
+- O(nlogn)
 */

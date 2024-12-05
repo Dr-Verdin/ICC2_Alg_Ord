@@ -1,38 +1,34 @@
 #include <stdio.h>
 
 // Função de particionamento
-int particao(int array[], int start, int end){
-    int pivo = array[end]; // Escolhemos o ultimo elemento como pivo
-    int i = (start - 1); // Indice do menor elemento
-
-    // Reorganiza a lista com base no pivo
-    for(int j = start; j <= end - 1; j++){
-        // Se o elemento atual é menor ou igual ao pivo, troca com o elemento na posição i + 1 e incrementa i + 1
-        if(array[j] <= pivo){
-            i++;
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+void particao(int array[], int start, int end, int *i, int *j){
+    int pivo, aux;
+    *i = start;
+    *j = end;
+    pivo = array[(*i + *j) / 2];
+    
+    do{
+        while(array[*i] < pivo)
+            (*i)++;
+        while(array[*j] > pivo)
+            (*j)--;
+        if(*i < *j){
+            aux = array[*i];
+            array[*i] = array[*j];
+            array[*j] = aux;
         }
-    }
-
-    // Coloca o pivo no lugar correto onde ele já deveria estar
-    int temp = array[i + 1];
-    array[i + 1] = array[end];
-    array[end] = temp;
-
-    return (i + 1); // Retorna o indice do pivo
+    } while (*i < *j);
 }
 
 void quickSort(int array[], int start, int end){
-    if(start < end){
-        // Particiona a lista e obtém o índice do pivô
-        int pivo = particao(array, start, end);
+    int i, j;
 
-        // Ordena recursivamente as sublistas à esquerda e à direita do pivô
-        quickSort(array, start, pivo - 1); // Sublista à esquerda
-        quickSort(array, pivo + 1, end); // Sublista à direita
-    }
+    particao(array, start, end, &i, &j);
+
+    if(start < j-1)
+        quickSort(array, start, j-1);
+    if(i+1 < end)
+        quickSort(array, i+1, end);
 }
 
 /*
